@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import unittest
+import time
 
 
 class NewVisitorTest(unittest.TestCase):
@@ -37,14 +38,16 @@ class NewVisitorTest(unittest.TestCase):
 		#엔터키를 치면 페이지가 갱신되고 작업 목록에
 		# "1: 공작깃털 사기" 아이템이 추가된다
     inputbox.send_keys(Keys.ENTER)
-    self.check_for_row_in_list_table('공작깃털 사기')
+
+    time.sleep(1)
+    self.check_for_row_in_list_table('1: 공작깃털 사기')
 
 		# 추가 아이템을 입력할 수 있는 여분의 텍스트 상자가 존재한다
 		# 다시 "공작깃털을 사용해서 그물 만들기"라고 입력한다 (에디스는 매우 체계적인 사람이다)
     inputbox = self.browser.find_element_by_id('id_new_item')
     inputbox.send_keys('공작깃털을 이용해서 그물 만들기')
     inputbox.send_keys(Keys.ENTER)
-  
+    time.sleep(1)
 		# 페이지는 다시 갱신되고, 2개 아이템이 목록에 보여진다
     self.check_for_row_in_list_table('2: 공작깃털을 이용해서 그물 만들기')
     self.check_for_row_in_list_table('1: 공작깃털 사기')
